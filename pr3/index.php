@@ -5,10 +5,16 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // If login already in $_COOKIE will return that person from them. Else creates new one.
-if (isset($_POST["login"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if (isset($_COOKIE[$_POST["login"]])) {
-    $_SESSION["user"] = $_POST['login'];
+    $userFromCookies = unserialize(base64_decode($_COOKIE[$_POST["login"]]));
+    if (password_verify($_POST["password"], $userFromCookies['password'])) {
+      $_SESSION["user"] = $_POST['login'];
+    } else {
+      header('Location: ' . $_SERVER["PHP_SELF"]);
+      die();
+    }
   } else {
     $user = [
       'fullname' => $_POST["fullname"],
@@ -73,7 +79,7 @@ if (isset($_GET['logout'])) {
     <input type="number" name="age" id="age" placeholder="Возраст" required>
     <input type="text" name="login" id="login" placeholder="Логин" required>
     <input type="password" name="password" id="password" placeholder="Пароль" required>
-    <button type="submit">Регистрация</button>
+    <button type="submit">Регистрация или Вход</button>
   </form>
 
 <?php endif; ?>
