@@ -1,0 +1,42 @@
+.odd {
+	background-color: #3db2f5;
+}
+
+.even {
+	background-color: #3df5af;
+}
+
+.double {
+	background-color: #9af53d;
+}
+
+.none {
+	background-color: white;
+}
+
+.border {
+	border:  1px solid black;
+	text-align: center;
+}
+
+.column {
+	width: 15%;
+	display: inline-block;
+	margin-top: 60px;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-rows: 200px;
+	grid-template-columns: 1fr;
+}
+
+.g-menu {
+	margin-top: 100px;
+	grid-column: 1/2;
+}
+
+.v-menu {
+	margin-left: 50px;
+	grid-row: 2;
+}
