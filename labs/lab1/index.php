@@ -17,28 +17,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 ?>
 
-<link href="styles.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="wrapper">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu page</title>
+</head>
 
-	<div class="g-menu">
-		<?= menu($menu); ?>
+<body>
+
+
+	<link href="styles.css" rel="stylesheet" type="text/css">
+
+	<div class="wrapper">
+
+		<div class="g-menu">
+			<?= menu($menu); ?>
+		</div>
+
+		<div class="v-menu">
+			<?= isset($menu[$page]['sub']) ? menu($menu[$page]['sub'], true, $page) : '' ?>
+		</div>
+
+		<?php
+		if (isset($_GET['parent'])) {
+			$fileName = $menu[$_GET['parent']]['sub'][$_GET['page']]['html'];
+		} else {
+			$fileName = $menu[$page]['html'];
+		}
+		if (file_exists(FILE_PATH_HTML . $fileName)) {
+			include FILE_PATH_HTML . $fileName;
+		}
+
+		?>
+
 	</div>
 
-	<div class="v-menu">
-		<?= isset($menu[$page]['sub']) ? menu($menu[$page]['sub'], true, $page) : '' ?>
-	</div>
+</body>
 
-	<?php
-	if (isset($_GET['parent'])) {
-		$fileName = $menu[$_GET['parent']]['sub'][$_GET['page']]['html'];
-	} else {
-		$fileName = $menu[$page]['html'];
-	}
-	if (file_exists(FILE_PATH_HTML . $fileName)) {
-		include FILE_PATH_HTML . $fileName;
-	}
-
-	?>
-
-</div>
+</html>
