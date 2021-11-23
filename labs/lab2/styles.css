@@ -1,0 +1,49 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.odd {
+  background-color: #3db2f5;
+}
+
+.even {
+  background-color: #3df5af;
+}
+
+.double {
+  background-color: #9af53d;
+}
+
+.none {
+  background-color: white;
+}
+
+.border {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.column {
+  width: 15%;
+  display: inline-block;
+  margin-top: 60px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+}
+
+.g-menu {
+  padding: 32px;
+  height: fit-content;
+  grid-column: 1/2;
+}
+
+.v-menu {
+  margin-left: 50px;
+  grid-row: 2;
+}
