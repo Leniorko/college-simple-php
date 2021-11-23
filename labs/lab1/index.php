@@ -7,11 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 	$page = $_GET['parent'] ?? $_GET['page'];
 
-	// if (!isset($page)) {
-	// 	header("Location: " . $_SERVER["PHP_SCRIPT"] . "?page=main");
-	// 	die();
-	// }
-
 	if (
 		!array_key_exists($page, $menu) ||
 		(isset($_GET['parent']) && !array_key_exists($_GET['page'], $menu[$page]['sub']))
@@ -34,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 		<?= isset($menu[$page]['sub']) ? menu($menu[$page]['sub'], true, $page) : '' ?>
 	</div>
 
-	<?
+	<?php
 	if (isset($_GET['parent'])) {
 		$fileName = $menu[$_GET['parent']]['sub'][$_GET['page']]['html'];
 	} else {
